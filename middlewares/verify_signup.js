@@ -2,12 +2,12 @@ import docente from '../components/docente/model'
 import docente from '../components/docente/models/docente'
 import rol from '../components/rol/model'
 
-export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
+export const checkDuplicateUsernameOrUsuario = async (req, res, next) => {
     const docente = await docente.findOne({username: req.body.username})
     if (docente) 
         return res.status(400).json({message: 'The user already exists.'})
 
-    const usuario = await docente.findOne({eusuario: req.body.email})
+    const usuario = await docente.findOne({eusuario: req.body.usuario})
     if (usuario)
         return res.status(400).json({message: 'The email already exists.'})
     
@@ -20,7 +20,7 @@ export const checkExistingUser = async (req, res, next) => {
         if (userFound)
             return res.status(400).json({ message: "The user already exists" });
 
-        const usuario = await docente.findOne({ usuario: req.body.email });
+        const usuario = await docente.findOne({ usuario: req.body.usuario });
         if (usuario)
             return res.status(400).json({ message: "The user already exists" });
 
