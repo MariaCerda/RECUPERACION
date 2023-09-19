@@ -2,8 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const docenteRoutes = require('./routes/docenteRoutes');
-const authRoutes = require('./routes/authRoutes');
+const docenteRoutes = require('./components/docente/routes/docenteRoutes');
+const usuarioRoutes = require('./components/usuario/routes/usuarioRoutes');
 
 const app = express();
 
@@ -13,7 +13,7 @@ mongoose.set('useFindAndModify', false);
 app.use(bodyParser.json());
 
 app.use('/docentes', docenteRoutes);
-app.use('/auth', authRoutes);
+app.use('/usuarios', usuarioRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

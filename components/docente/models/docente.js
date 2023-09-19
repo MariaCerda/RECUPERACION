@@ -1,4 +1,4 @@
-// models/Docente.js
+// components/docente/models/Docente.js
 const mongoose = require('mongoose');
 
 const docenteSchema = new mongoose.Schema({
@@ -7,7 +7,7 @@ const docenteSchema = new mongoose.Schema({
   apellidos: String,
   usuario: String,
   clave: String,
-  role: String,
+  role: String, // 'admin' o 'docente'
 });
 
 module.exports = mongoose.model('Docente', docenteSchema);

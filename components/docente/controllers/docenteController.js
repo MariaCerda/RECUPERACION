@@ -1,20 +1,20 @@
-// controllers/docenteController.js
+// components/docente/controllers/docenteController.js
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const Docente = require('../models/Docente');
+const Docente = require('../models/docente');
+const { generateToken } = require('../../../config/auth');
 
 // Registro de un docente (solo admin)
 exports.registrarDocente = async (req, res) => {
   try {
     const { cedula, nombres, apellidos, usuario, clave, role } = req.body;
-    
+
     if (!role || (role !== 'admin' && role !== 'docente')) {
       return res.status(400).json({ message: 'El campo "role" debe ser "admin" o "docente".' });
     }
 
     const hashedClave = await bcrypt.hash(clave, 10);
     const nuevoDocente = new Docente({ cedula, nombres, apellidos, usuario, clave: hashedClave, role });
-    
+
     await nuevoDocente.save();
     res.status(201).json(nuevoDocente);
   } catch (error) {
